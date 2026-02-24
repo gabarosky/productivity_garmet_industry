@@ -1,0 +1,25 @@
+# Entornos virtuales (Conda y venv)
+env/
+venv/
+.env
+*.venv
+anaconda-project.yaml
+
+# Archivos de Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Python (Archivos temporales)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Datos pesados (Opcional)
+# Si tus CSV o datasets pesan más de 50MB, descomenta la línea de abajo:
+# *.csv
+# *.zip
+# *.json
+
+# Sistema
+.DS_Store
+Thumbs.db
