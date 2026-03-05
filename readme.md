@@ -1,26 +1,23 @@
-# Churn prediction and actionable insights for Telecommunications Industry 
+# Driving garment production efficiency through predictive analytics and smart insights.
 
 
 
 
 ### 🧠 1. Business Problem
 
-In telecom companies, customer retention is more cost-effective than customer acquisition. Therefore, predicting churn and understanding its causes is critical for a company's growth.
-
-In this project, we analyzed the key drivers of customer churn, identified the most predictive variables, implemented a machine learning algorithm to estimate the probability of churn for customers, identified target groups for retention campaigns using lift analysis, and evaluated the business implications across different scenarios.
+The garment industry is a labor-intensive sector where productivity directly impacts operational costs and delivery timelines. The objective of this analysis is to predict and analyze the productivity performance of manufacturing teams. The study identifies key operational drivers and provides a tool for data-driven decision-making.
 
 ----------
 
 ### 📊 2. Dataset
 
--   [Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) from [Kaggle](www.kaggle.com).
+-   [Productivity Prediction of Garment Employees](https://doi.org/10.24432/C51S6D) from [UCI Machine Learning Repository](https://archive.ics.uci.edu/).
     
--   Contains 7043 rows (customers) and 21 columns (features). Each row corresponds to a client and each column to a feature.
+-   Contains 1197 instances and 14 features. Each instance correspond to a combination of team and departament (sewing or finishing) for a day between 01-Jan-2015 and 11-Mar-2015.
     
--   Target variable: Churn
-    
--   Class imbalance: 73.42% No, 26.58% Yes
-    
+-   Target variable: actual_productivity
+
+In this project, we replaced the 'actual_productivity' target with a categorical target based on 'actual_productivity' intervals.
 
 ---
 
@@ -29,30 +26,27 @@ In this project, we analyzed the key drivers of customer churn, identified the m
 - Data overview and cleaning  
 - EDA    
 - Feature engineering    
+- Split train/test set
 - Model comparison
 - Preprocessing with pipelines
 - Hyperparameter Tuning with Random Search
 - Cross-validation
-- Lift analysis
-- Model Interpretability
-- Business analysis
-- Customer Lifetime Value (CLV) estimation
-- Scenario-based ROI simulations for alternative campaign strategies
+- Model Interpretability: Analyzing Individual Predictions
+- Industrial implications
+- Prescriptive Analysis: Using SHAP for Decision Making
     
-
-
 
 ----------
 ### 📁 3. Project Structure
 
 ```
-Telcochurn/
+productivity_garmet_industry/
 │
 ├── 📂 data/
-│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv  # original dataset
+│   └── garments_worker_productivity.csv  # original dataset
 │
 ├── 📂 notebooks/                 
-│   └── churn.ipynb        # EDA, Model Selection, Training & Fitting, Evaluation, Lift Analysis & Business Analysis
+│   └── initial.ipynb        # EDA, Model Selection, Training & Fitting, Evaluation, Lift Analysis & Business Analysis
 │
 ├── requirements.txt
 └── README.md
@@ -63,53 +57,60 @@ Telcochurn/
 
 -   **Data manipulation:** pandas, NumPy, SciPy
 -   **Visualization:** Matplotlib, Seaborn
--   **Modeling:** scikit-learn, XGBoost
-    -   Algorithms: Logistic Regression, SVM, Random Forest
+-   **Modeling:** scikit-learn, XGBClassifier, LGBMClassifier
+    -   Algorithms: Logistic Regression, SVM, Random Forest, XGBClassifier, LGBMClassifier, Extratrees, KNN
     -   Pipelines: Pipeline, ColumnTransformer, StandardScaler, OneHotEncoder
     -   Tuning & validation: StratifiedKFold, RandomizedSearchCV
-    -   Metrics: AUC-ROC, F1, Recall, Precision
+    -   Metrics: MAE, F1-Score macro average, Balanced Accuracy
 
 ----------
 ### 📈 5. Results
 
 Through a cross validation the metrics obtained were
-| Model               | Accuracy | Precission | Recall   | F1       | AUC      |   |
-|---------------------|----------|------------|----------|----------|----------|---|
-| Logistic Reggresion |  0.802844  | 0.655436   | 0.545819 | 0.595425 | **0.846033** |   |
-| SVC                 | 0.802133 | 0.680362   | 0.484950 | 0.565853 | 0.802866 |   |
-| RandomForest        | 0.792889 | 0.643282   | 0.495652 | 0.559612 | 0.828567 |   |
-| XGBoost             | 0.788089 | 0.621190   | 0.517726 | 0.564458 | 0.830772 |   |
+| Model        | F1 Macro Average | Balanced Accuracy | MAE  |
+|--------------|------------------|-------------------|-----------------------|
+| LogReg       | 0.4894           | 0.4910            | 0.7098                |
+| SVC          | 0.5762           | 0.5733            | 0.6905                |
+| RandomForest | 0.6831           | 0.6832            | 0.4551                |
+| XGBoost      | 0.6693           | 0.6690            | 0.4611                |
+| LightGBM     | 0.6857           | 0.6874            | 0.4563                |
+| ExtraTrees   | 0.6869           | 0.6868            | 0.4575                |
+| KNN          | 0.6325           | 0.6310            | 0.5400                |
 
-In most of measures the Logistic Regression was the best model. Due to the auc score, this was the chosen model. The relevance of this metric is that allow to decision makers to choose the threshold for the actions, keeping a good quality of churn predictions.
+By using MAE, we ensure that the model is penalized based on the distance between the predicted and actual category, helping us avoid significant gaps in productivity forecasting. Therefore the selected model is Random Forest
 
-After parameter tunning:
--   ROC-AUC: 0.85  
--   Recall: 0.82 (it means that only 18% of the churn clients was not detected by the model)
--   Lift (10%):  2.8x
--   Lift (30%):  2.2x   
+After parameter tunning, in test set:
+- MAE: 0.4444
+- F1-score (macro average): 0.7213
+- Balanced accuracy: 0.7270 
 
 ----------
 
 ### 💰 6. Business Impact
 
-Under the assumptions of a 50% gross margin, targeting groups of customers rather than individuals, and assuming homogeneous response to the campaign, three scenarios were considered across two campaigns with a cost of 20 **USD** per customer. Acting on the optimal target, we project a net profit of 32,977 USD, with an ROI of 0.62, effectively preventing the churn of 145 customers in a neutral scenario
+
+The proposed productivity prediction has a lift of 1.47x, which means it is 47% more accurate than the baseline. This allows data-driven decision-makers to leverage insights and improve overall performance.
+   
 
 ----------
 
 ### 🔎 7. Key Insights
 
-1.  **Churn risk is highly concentrated.**  
-    The top decile of customers is 2.8x more likely to churn compared to random selection, enabling efficient targeting.
-    
-2.  **Revenue exposure is significant.**  
-    Estimated Revenue at Risk is approximately 1.96M USD if no intervention is implemented.
-    
-3.  **Targeted retention is economically viable.**
-    
-    -   A campaign targeting only the top 10% of customers requires a 10.6% success rate to break even.
-    -   Expanding the campaign to the top 30% (deciles 8–10) reduces the breakeven threshold to 6.66% and substantially increases upside potential.
-4.  **Risk-return profile favors broader targeting.**  
-    Under neutral and optimistic scenarios, the 30% targeting strategy generates materially higher ROI while maintaining manageable downside risk.
+
+1. **Targeted productivity is the primary global driver of the model.**  
+   Despite the shortcomings of targeted productivity for predicting productivity, it is a good input for our model.
+
+2. **Incentives show significant predictive weight, followed by team size and SMV.**  
+   This information is very important because incentives and the number of workers are levers for decision-making.
+
+3. **Simulation of the predicted production.**  
+   Using the model, it is possible to improve the predicted production using incentives, number of workers in the team, overtime; under the control of the decision-maker.
+   
+### Recommendation
+
+- Retain 'targeted productivity' as a core model input rather than a standalone metric.
+
+- Utilize productivity simulations as a strategic decision-making tool to optimize production lines.
 
 ----------
 ### 🚀 8. How to Run
@@ -118,14 +119,14 @@ bash
 
 ```bash
 # Clone the repository
-git clone https://github.com/gabarosky/Telcochurn.git
-cd Telcochurn
+git clone https://github.com/gabarosky/productivity_garmet_industry.git
+cd productivity_garmet_industry
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Launch Jupyter
-jupyter notebook notebooks/churn.ipynb
+jupyter notebook notebooks/initial.ipynb
 ```
 
 **Recommended:** Python 3.11+` 
