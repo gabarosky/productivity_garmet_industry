@@ -1,0 +1,53 @@
+{
+  "numeric_ranges": {
+    "targeted_productivity": {
+      "min": 0.07,
+      "max": 0.8
+    },
+    "smv": {
+      "min": 2.9,
+      "max": 54.56
+    },
+    "wip": {
+      "min": 0.0,
+      "max": 23122.0
+    },
+    "over_time": {
+      "min": 0.0,
+      "max": 25920.0
+    },
+    "incentive": {
+      "min": 0.0,
+      "max": 3600.0
+    },
+    "idle_time": {
+      "min": 0.0,
+      "max": 300.0
+    },
+    "idle_men": {
+      "min": 0.0,
+      "max": 45.0
+    },
+    "no_of_workers": {
+      "min": 2.0,
+      "max": 89.0
+    }
+  },
+  "categorical_categories": {
+    "department": [
+      "sewing",
+      "finishing"
+    ]
+  },
+  "feature_names_final": [
+    "targeted_productivity",
+    "smv",
+    "wip",
+    "over_time",
+    "incentive",
+    "idle_time",
+    "idle_men",
+    "no_of_workers",
+    "department_sewing"
+  ]
+}
