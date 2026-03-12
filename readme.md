@@ -69,27 +69,27 @@ productivity_garmet_industry/
 Through a cross validation the metrics obtained were
 | Model        | F1 Macro Average | Balanced Accuracy | MAE  |
 |--------------|------------------|-------------------|-----------------------|
-| LogReg       | 0.4894           | 0.4910            | 0.7098                |
-| SVC          | 0.5762           | 0.5733            | 0.6905                |
-| RandomForest | 0.6831           | 0.6832            | 0.4551                |
-| XGBoost      | 0.6693           | 0.6690            | 0.4611                |
-| LightGBM     | 0.6857           | 0.6874            | 0.4563                |
-| ExtraTrees   | 0.6869           | 0.6868            | 0.4575                |
-| KNN          | 0.6325           | 0.6310            | 0.5400                |
+| LogReg       | 0.518154         | 0.516586          | 0.667851              |
+| SVC          | 0.597866         | 0.591658          | 0.596195              |
+| RandomForest | 0.710819         | 0.712064          | 0.396645              |
+| XGBoost      | 0.702878         | 0.704577          | 0.410948              |
+| LightGBM     | 0.700600         | 0.701626          | 0.413334              |
+| ExtraTrees   | 0.708730         | 0.710022          | 0.396611              |
+| KNN          | 0.568091         | 0.565888          | 0.611740              |
 
 By using MAE, we ensure that the model is penalized based on the distance between the predicted and actual category, helping us avoid significant gaps in productivity forecasting. Therefore the selected model is Random Forest
 
 After parameter tunning, in test set:
-- MAE: 0.4444
-- F1-score (macro average): 0.7213
-- Balanced accuracy: 0.7270 
+- MAE: 0.4917
+- F1-score (macro average): 0.6935
+- Balanced accuracy: 0.6985
 
 ----------
 
 ### 💰 6. Business Impact
 
 
-The proposed productivity prediction has a lift of 1.47x, which means it is 47% more accurate than the baseline. This allows data-driven decision-makers to leverage insights and improve overall performance.
+The proposed productivity prediction has a lift of 1.42x, which means it is 42% more accurate than the baseline. This allows data-driven decision-makers to leverage insights and improve overall performance.
    
 
 ----------
